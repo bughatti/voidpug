@@ -1,0 +1,22 @@
+## Interface: 120007
+## Title: |cff00c7ffVoidPug|r
+## Notes: Tracks pug raid lockouts: leader, roster, boss kills, reset timers. Auto-scans chat for btag + Discord.
+## Author: Vede
+## Version: 0.5.2
+## SavedVariables: VoidPugDB
+## SavedVariablesPerCharacter: VoidPugCharDB, VoidHubCharDB
+## IconTexture: Interface\Icons\INV_Misc_GroupLooking
+
+# Embedded VoidLib so users do not need a separate addon download.
+Libs\VoidLib\VoidLib.lua
+Libs\VoidLib\Secrets.lua
+Libs\VoidLib\Logger.lua
+
+Core.lua
+Events.lua
+Sync.lua
+LFGHook.lua
+UI.lua
+Minimap.lua
+CalendarPlugin.lua
+VoidHubBundle.lua

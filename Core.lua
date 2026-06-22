@@ -590,7 +590,6 @@ boot:SetScript("OnEvent", function(_, event, arg1)
                 end
             end
         end
-        VPT.Print(VPT.C_DIM .. "v" .. VPT.version .. " loaded. /vpt for panel.|r")
     elseif event == "PLAYER_LOGOUT" then
         -- Touch GetDB so defaults are written if user hasn't opened the
         -- panel this session. WoW persists SavedVariables on logout

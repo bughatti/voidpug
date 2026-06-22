@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.3] — 2026-06-22
+
+### Changed
+- Quieter startup — removed the load-banner chat messages that printed on login.
+
 ## [0.5.2] — 2026-06-20
 
 ### Compatibility

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.4] — 2026-06-22
+
+### Changed
+- Lockout reset reminders now show at most once per hour instead of on every /reload — the 24h-before-reset warning was repeating on each reload. Also trimmed the redundant trailing line.
+
 ## [0.5.3] — 2026-06-22
 
 ### Changed

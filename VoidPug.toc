@@ -2,7 +2,7 @@
 ## Title: |cff00c7ffVoidPug|r
 ## Notes: Tracks pug raid lockouts: leader, roster, boss kills, reset timers. Auto-scans chat for btag + Discord. Discord: https://discord.gg/7ZHmx7zMDh
 ## Author: Vede
-## Version: 0.5.3
+## Version: 0.5.4
 ## SavedVariables: VoidPugDB
 ## SavedVariablesPerCharacter: VoidPugCharDB, VoidHubCharDB
 ## IconTexture: Interface\Icons\INV_Misc_GroupLooking

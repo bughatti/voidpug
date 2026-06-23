@@ -632,7 +632,11 @@ local function CheckResetReminders()
     if not cfg.resetReminderEnabled then return end
 
     local now = time()
-    local DAY = 86400
+    -- Throttle to once per hour so /reload doesn't re-spam the reminder while a
+    -- lockout sits in its final-24h window. lastResetReminder lives in
+    -- SavedVariables, so it survives reloads (an in-memory flag would not).
+    if cfg.lastResetReminder and (now - cfg.lastResetReminder) < 3600 then return end
+
     local alerts = {}
     VPT.ForEachLockout(function(key, entry, isExpired)
         if isExpired then return end
@@ -644,6 +648,7 @@ local function CheckResetReminders()
     end)
 
     if #alerts > 0 then
+        cfg.lastResetReminder = now
         VPT.Print(C_GOLD .. "⏰ Lockouts resetting within 24 hours:|r")
         for _, entry in ipairs(alerts) do
             local kills = #(entry.kills or {})
@@ -654,7 +659,6 @@ local function CheckResetReminders()
                 "(" .. difficulty .. ", " .. kills .. " kills, lead: " ..
                 leader .. ")|r")
         end
-        VPT.Print(C_DIM .. "Type /vpt to view contacts.|r")
     end
 end
 

@@ -97,7 +97,7 @@ If neither happens, you can manually paste the btag via the **Edit** button on t
 
 ## Compatibility
 
-- **WoW Interface 12.0.5** (Midnight)
+- **WoW Interface 12.0.7** (Midnight)
 - Works alongside any UI addon (ElvUI, VoidUI, etc.)
 - No taint — uses only public APIs (`GetInstanceInfo`, `GetRaidRosterInfo`, `C_DateAndTime`, etc.)
 - No combat operations — safe to use mid-raid

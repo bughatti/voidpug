@@ -1,8 +1,12 @@
 ----------------------------------------------------------------------
 -- VoidLib — shared utility library for Void* addons.
 --
--- Loaded as a hard dependency by Void* addons via:
---   ## Dependencies: VoidLib
+-- EMBEDDED, never an external dependency. Each addon ships its own copy under
+-- Libs/VoidLib/ and loads these three files at the TOP of its .toc (VoidLib.lua
+-- first). This keeps every published addon self-contained — players installing
+-- one addon from CurseForge need nothing else. Do NOT reintroduce a
+-- `## Dependencies: VoidLib` line or a runtime LoadAddOn("VoidLib") call.
+-- Keep embedded copies in sync via: tools/cmd/sync-libs  (see OPERATIONS.md).
 --
 -- Public surface:
 --   VoidLib.VERSION                -- semver string

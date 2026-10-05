@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.5] — 2026-08-11
+
+### Changed
+- Compatibility with patch 12.1 "Curse of Ula'tek" (TOC interface bump to 12.1).
+
 ## [0.5.4] — 2026-06-22
 
 ### Changed

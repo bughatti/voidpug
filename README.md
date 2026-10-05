@@ -107,3 +107,5 @@ If neither happens, you can manually paste the btag via the **Edit** button on t
 ## Credits
 
 Built for Vede on Elune. Inspired by the eternal frustration of losing track of a great pug group after one good run.
+
+*Part of the Void addon family · free M+ & raid player lookups at [voidscout.io](https://voidscout.io)*

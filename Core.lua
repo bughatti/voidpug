@@ -10,7 +10,8 @@ local function dbg(fmt, ...) if VoidSpy and VoidSpy.Log then VoidSpy:Log("VoidPu
 local ADDON_NAME, VPT = ...
 _G.VoidPug = VPT
 
-VPT.version = "0.5.0"
+-- Read from the TOC so it can't drift from the released version.
+VPT.version = (C_AddOns and C_AddOns.GetAddOnMetadata and C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version")) or "?"
 
 ----------------------------------------------------------------------
 -- Color palette (matches VoidFisher / VoidUI cyan theme)

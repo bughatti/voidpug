@@ -36,6 +36,7 @@ VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, t
 
 ### Minimap button
 - Left-click to open the panel, right-click to save, drag to move it around the minimap
+- Grouped under the shared **Void hub** icon by default — `/vhub satellites` shows individual Void icons
 
 ---
 
@@ -46,7 +47,7 @@ VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, t
 | `/vpt` | Open or close the panel (also `/pugs`) |
 | `/vpt save` | Save data to disk now (does a /reload) |
 | `/vpt refresh` | Re-check your raid lockouts |
-| `/vpt minimap` | Show or hide the minimap button |
+| `/vpt minimap` | Show or hide VoidPug's own minimap icon (when individual Void icons are on — `/vhub satellites`) |
 | `/vpt reminders` | Turn the reset reminders on or off |
 | `/vpt migrate` | Merge duplicate lockout entries |
 | `/vpt clear` | Delete ALL data (asks to confirm) |

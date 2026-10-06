@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.6] — 2026-10-06
+
+### Fixed
+- **Copy popups were blank** (debug, Copy Roster, View Btags) and the Battle.net tag **Edit** box couldn't save — patch 12.x renamed the popup parts. All fixed; multi-line text now shows in full.
+- `/vpt minimap` explains that the icon is grouped under the Void hub button (use `/vhub satellites` to show individual icons) instead of claiming it was shown.
+- The version number shown in `/vpt debug` is correct again.
+- The Void addons info panel (`/vhub info`) now lists only the addons you can actually get, with up-to-date descriptions.
+
 ## [0.5.5] — 2026-08-11
 
 ### Changed

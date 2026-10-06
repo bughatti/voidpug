@@ -119,6 +119,14 @@ end
 ----------------------------------------------------------------------
 function mod:Toggle()
     if not btn then return end
+    -- The shared Void hub (VoidHubBundle) hides every Void* icon and folds them into one
+    -- hub button unless the player turned individual icons on. Toggling here would
+    -- claim "shown" and get re-hidden next frame, so point at the hub instead.
+    if _G.VoidHubMinimapBtn and not (VoidHubCharDB and VoidHubCharDB.showSatellites) then
+        VPT.Print(VPT.C_DIM .. "VoidPug's icon is grouped under the Void hub button on your minimap. " ..
+            "Type /vhub satellites to show individual Void icons again.|r")
+        return
+    end
     if btn:IsShown() then
         btn:Hide()
         VoidPugCharDB.minimapHidden = true

@@ -32,6 +32,12 @@ local DETAIL_H = 240
 -- View Btags. Registered once at module load so we don't redefine it
 -- inside click handlers.
 ----------------------------------------------------------------------
+-- StaticPopup edit box: 12.x dialogs expose GetEditBox()/.EditBox; the old
+-- lowercase .editBox field is gone (nil), which left these popups blank.
+local function PopupEditBox(p)
+    return p and ((p.GetEditBox and p:GetEditBox()) or p.EditBox or p.editBox)
+end
+
 StaticPopupDialogs["VPT_COPY_TEXT"] = {
     text           = "Ctrl+A then Ctrl+C to copy:",
     button1        = OKAY or "OK",
@@ -42,24 +48,29 @@ StaticPopupDialogs["VPT_COPY_TEXT"] = {
     hideOnEscape   = true,
     preferredIndex = 3,
     OnShow = function(self, data)
-        if self.editBox and data and data.text then
-            self.editBox:SetText(data.text)
-            self.editBox:HighlightText()
-            self.editBox:SetFocus()
+        local eb = PopupEditBox(self)
+        if eb and data and data.text then
+            eb:SetText(data.text)
+            eb:HighlightText()
+            eb:SetFocus()
         end
     end,
 }
 
 local function ShowCopyPopup(text)
+    -- The popup's edit box is a single line: multi-line text showed only its last
+    -- line. Join lines with a visible separator so everything is readable and copies.
+    text = (text or ""):gsub("\n+", "  |  "):gsub("^%s*|%s*", "")
     -- StaticPopup_Show's OnShow(self, data) callback doesn't reliably
     -- receive the data param in all client versions. Set the editbox
     -- contents directly on the returned popup frame as a belt-and-suspenders
     -- guarantee.
     local popup = StaticPopup_Show("VPT_COPY_TEXT", "", "", { text = text })
-    if popup and popup.editBox then
-        popup.editBox:SetText(text or "")
-        popup.editBox:HighlightText()
-        popup.editBox:SetFocus()
+    local eb = PopupEditBox(popup)
+    if eb then
+        eb:SetText(text or "")
+        eb:HighlightText()
+        eb:SetFocus()
     end
 end
 
@@ -103,13 +114,15 @@ local function ShowEditPopup(title, currentValue, callback)
             hideOnEscape = true,
             preferredIndex = 3,
             OnShow = function(self, data)
-                if self.editBox and data and data.initial then
-                    self.editBox:SetText(data.initial or "")
+                local eb = PopupEditBox(self)
+                if eb and data and data.initial then
+                    eb:SetText(data.initial or "")
                 end
             end,
             OnAccept = function(self, data)
-                if data and data.cb and self.editBox then
-                    data.cb(self.editBox:GetText() or "")
+                local eb = PopupEditBox(self)
+                if data and data.cb and eb then
+                    data.cb(eb:GetText() or "")
                 end
             end,
             EditBoxOnEnterPressed = function(self, data)
@@ -638,10 +651,11 @@ local function RenderDetail(entry, parentRow)
                     local popup = _G["StaticPopup" .. i]
                     if not popup then break end
                     if popup:IsShown() and popup.which == "ADD_FRIEND" then
-                        if popup.editBox then
-                            popup.editBox:SetText(cleanBtag)
-                            popup.editBox:HighlightText()
-                            popup.editBox:SetFocus()
+                        local eb = PopupEditBox(popup)
+                        if eb then
+                            eb:SetText(cleanBtag)
+                            eb:HighlightText()
+                            eb:SetFocus()
                         end
                         break
                     end

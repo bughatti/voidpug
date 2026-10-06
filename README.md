@@ -2,110 +2,81 @@
 
 **Track pug raid lockouts automatically — never lose contact with a good pug leader.**
 
-VoidPug silently records every Mythic and Heroic raid pug you join: the leader, the full roster, every boss kill, and the reset timestamp. When next reset rolls around and the same group reforms, you'll have the contact info ready to whisper or invite.
-
----
-
-## Why this exists
-
-You spent 4 hours pugging Mythic Voidspire with a chill group. You killed 3 bosses. The raid ends, the group disbands, and... you have no way to reconnect with them next week. By reset time, you've forgotten who led, who tanked, and definitely who shared their btag in chat.
-
-VoidPug captures all of that **automatically** so you can re-form with the same group next reset and keep clearing your lockout.
+VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, the full roster, every boss kill, and when the lockout resets. When the same group re-forms next week, you'll have their contact info ready to whisper or invite.
 
 ---
 
 ## Features
 
-### 🎯 Auto-capture (no clicks needed)
-- **Raid name + difficulty** detected on instance entry
-- **Group leader** identified via raid LEAD flag
-- **Full roster** (every player who was in the raid, with first/last-seen timestamps)
-- **Boss kills** recorded with timestamps via `ENCOUNTER_END` + saved-instance API fallback
-- **Reset countdown** via `GetSavedInstanceInfo` with weekly-reset fallback for fresh instances
+### Auto-capture — no clicks needed
+- **Raid and difficulty** — detected when you zone in
+- **Group leader** — identified from the raid's leader flag
+- **Full roster** — everyone who was in the raid, with first- and last-seen times
+- **Boss kills** — recorded with timestamps
+- **Reset countdown** — how long until the lockout expires
 
-### 🔍 Auto-detection from chat
-- **Battle.net tags**: any `Name#1234` posted in raid/party/whisper chat gets captured and tied to the sender (or whoever's name appears alongside it)
-- **Discord handles**: matches patterns like `discord: bonkdk`, `disc: handle`, `dc: foo`, `my discord is X`
-- **Bnet friend lookup**: if the leader is already on your Battle.net friend list, btag auto-fills
+### Contact details from chat
+- **Battle.net tags** — any `Name#1234` posted in raid, party, or whisper chat is captured and tied to the sender
+- **Discord handles** — picks up `discord: name`, `disc: name`, `dc: name`, and "my discord is …"
+- **Friends list** — if the leader is already your Battle.net friend, their tag fills in automatically
 
-### 🎨 Smart roster view
-- **Current vs dropped**: white = still in raid, dimmed "(left)" = was here earlier but dropped
-- **Per-player timestamps** preserved across captures so you know when people joined/left
+### Smart roster view
+- **Current vs dropped** — white = still in the raid, dimmed "(left)" = dropped earlier
+- **Join/leave times** are kept so you know who stuck around
 
-### 📞 One-click contact
-- **Whisper button**: uses btag if known, falls back to `/w Name-Realm` cross-realm whisper
-- **Add WoW Friend**: instant character-only friend add (no btag required)
-- **Add Bnet**: opens add-friend dialog with btag pre-printed if captured
+### One-click contact
+- **Whisper** — uses their Battle.net tag if known, otherwise a cross-realm `/w Name-Realm`
+- **Add WoW Friend** — character friend add, no tag needed
+- **Add Battle.net friend** — opens the add-friend dialog with the tag pre-filled
 
-### 💾 Reliable persistence
-- **Raid-end alert**: when you leave the raid, chat prompts with a one-click save reminder
-- **Save (/reload) button**: flushes in-memory data to disk on demand
-- **Last-saved indicator** in the panel header so you know how stale your in-memory state is
+### Never lose a capture
+- **Raid-end reminder** — when you leave the raid, chat offers a one-click save
+- **Save button** and a **last-saved** indicator in the panel header
+- **Reset reminders** — a heads-up 24 hours before your lockout resets
 
-### 🗺️ Minimap button
-- Left-click: toggle panel
-- Right-click: save (/reload)
-- Drag to orbit around minimap edge
-- Per-character position saved
+### Minimap button
+- Left-click to open the panel, right-click to save, drag to move it around the minimap
 
 ---
 
-## Slash commands
+## Slash Commands
 
-| Command | Action |
+| Command | What it does |
 |---|---|
-| `/vpt` | Toggle panel (also `/pugs`) |
-| `/vpt save` | Flush data to disk (does /reload) |
-| `/vpt refresh` | Re-poll WoW raid info |
-| `/vpt minimap` | Toggle minimap button |
-| `/vpt clear` | Delete ALL data (confirmation popup) |
-| `/vpt migrate` | Re-key + merge duplicate lockout entries |
-| `/vpt reminders` | Toggle 24h-reset chat alerts |
-| `/vpt debug` | Print current raid context (troubleshooting) |
+| `/vpt` | Open or close the panel (also `/pugs`) |
+| `/vpt save` | Save data to disk now (does a /reload) |
+| `/vpt refresh` | Re-check your raid lockouts |
+| `/vpt minimap` | Show or hide the minimap button |
+| `/vpt reminders` | Turn the reset reminders on or off |
+| `/vpt migrate` | Merge duplicate lockout entries |
+| `/vpt clear` | Delete ALL data (asks to confirm) |
+| `/vpt debug` | Print the current raid info (troubleshooting) |
 
 ---
 
-## How to use
+## Getting Started
 
-1. **Install** to `Interface/AddOns/VoidPug/`
-2. Reload your UI (`/reload`)
-3. **Join any Heroic or Mythic raid** — entry auto-creates
-4. **Anyone shares their btag in chat?** Auto-captured for that character
-5. **Raid ends** — chat alert prompts you to save
-6. Click **`💾 Save (/reload)`** in the panel or type `/vpt save`
-7. **Next reset week**: open `/vpt`, find the entry, click **`Bnet Whisper`** → contact saved
-8. Done.
+1. Install with the CurseForge app, or copy the `VoidPug` folder into `World of Warcraft/_retail_/Interface/AddOns/`.
+2. Restart WoW or `/reload`.
+3. Join any Heroic or Mythic raid pug — an entry is created automatically.
+4. When the raid ends, click **Save** when the chat reminder appears.
+5. Next week: open `/vpt`, find the group, and whisper the leader.
 
 ---
 
-## Why btags are sometimes missing
+## Good to Know
 
-WoW's API restricts battletag lookups to your **existing Bnet friend list** for privacy. The addon can't see strangers' btags. To get someone's btag automatically:
-- They share it in chat (auto-detected ✅)
-- You add them as a friend first (then their btag is visible)
-
-If neither happens, you can manually paste the btag via the **Edit** button on the Btag field.
-
----
-
-## Storage
-
-- **`VoidPugDB`** (account-wide): All lockout entries with rosters, kills, btags, notes
-- **`VoidPugCharDB`** (per-character): Minimap button position, visibility preference
+- **Why tags are sometimes missing:** WoW only reveals Battle.net tags of people already on your friends list. VoidPug fills them in when someone shares theirs in chat or after you add them — or paste one in with the **Edit** button.
+- Your lockout history is saved account-wide, so every character sees it.
 
 ---
 
 ## Compatibility
 
-- **WoW Interface 12.0.7** (Midnight)
-- Works alongside any UI addon (ElvUI, VoidUI, etc.)
-- No taint — uses only public APIs (`GetInstanceInfo`, `GetRaidRosterInfo`, `C_DateAndTime`, etc.)
-- No combat operations — safe to use mid-raid
+- **WoW 12.1** (Midnight Season 2)
+- Standalone — nothing else to install
+- Combat-safe and taint-free — works alongside any UI addon
 
 ---
 
-## Credits
-
-Built for Vede on Elune. Inspired by the eternal frustration of losing track of a great pug group after one good run.
-
-*Part of the Void addon family · free M+ & raid player lookups at [voidscout.io](https://voidscout.io)*
+*Part of the Void addon family by Vede · MIT licensed · free M+ & raid player lookups at [voidscout.io](https://voidscout.io) · more addons & apps at [tinkerline.io](https://tinkerline.io) · [Discord](https://discord.gg/7ZHmx7zMDh)*

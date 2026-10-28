@@ -1,0 +1,104 @@
+# Changelog
+
+## [0.5.8] — 2026-10-27
+
+### Fixed
+- **Lockouts synced from your other characters** keep their real raid and difficulty instead of showing as "?" and being lumped together.
+- **Expired lockouts** are worked out when shown, so a lockout past its reset no longer lingers as active.
+- **Contacts:** each group member keeps their own BattleTag / Discord instead of getting the leader's, a new leader brings their own details, and same-name players on other realms no longer get someone else's contact info.
+- **Boss kills** imported from your saved raids are no longer counted twice.
+- **No errors** when the game hides names (calendar invites, group finder leaders) during chat lockdown.
+
+### Added
+- VoidPug shows up in the VoidHub launcher.
+
+## [0.5.7] — 2026-10-14
+
+### Changed
+- Updated for WoW 12.1.5 — no longer shows as out of date.
+
+## [0.5.6] — 2026-10-06
+
+### Fixed
+- **Copy popups were blank** (debug, Copy Roster, View Btags) and the Battle.net tag **Edit** box couldn't save — patch 12.x renamed the popup parts. All fixed; multi-line text now shows in full.
+- `/vpt minimap` explains that the icon is grouped under the Void hub button (use `/vhub satellites` to show individual icons) instead of claiming it was shown.
+- The version number shown in `/vpt debug` is correct again.
+- The Void addons info panel (`/vhub info`) now lists only the addons you can actually get, with up-to-date descriptions.
+
+## [0.5.5] — 2026-08-11
+
+### Changed
+- Compatibility with patch 12.1 "Curse of Ula'tek" (TOC interface bump to 12.1).
+
+## [0.5.4] — 2026-06-22
+
+### Changed
+- Lockout reset reminders now show at most once per hour instead of on every /reload — the 24h-before-reset warning was repeating on each reload. Also trimmed the redundant trailing line.
+
+## [0.5.3] — 2026-06-22
+
+### Changed
+- Quieter startup — removed the load-banner chat messages that printed on login.
+
+## [0.5.2] — 2026-06-20
+
+### Compatibility
+- Updated for WoW **12.0.7** (Sporefall). Verified every C_* API call against the patched client — all present; no code changes needed.
+
+
+## [0.5.1] — 2026-06-03
+
+### Bug fixes
+- **Embedded VoidLib.** Previous releases declared `## Dependencies: VoidLib`
+  but VoidLib was never published to CurseForge as a standalone addon, so
+  installs from CurseForge would fail to load with "Dependency: VoidLib is
+  missing." VoidLib is now bundled under `Libs/VoidLib/` — no separate
+  addon required.
+
+All notable changes to VoidPug will be documented here.
+
+## [0.1.2] — 2026-05-21
+
+### Bug fixes
+- **Fix Lua error on BN whispers**: Chat-message body and sender strings from
+  CHAT_MSG_BN_WHISPER and similar events can arrive as 12.0.5 "secret string
+  values" that throw `attempt to compare local 'message' (a secret string
+  value)` errors. Added `issecretvalue()` guards in `ExtractBtags`,
+  `ExtractDiscords`, and `NormalizeName` — secret-tainted strings are skipped
+  silently (we can't parse battletags/Discord handles out of them anyway).
+- No functional change for regular guild/party chat parsing; this only
+  affected BN-whisper-derived messages.
+
+## [0.1.1] — 2026-05-17
+
+### Bug fixes
+- Removed registration for `BOSS_KILL_UNFILTERED` — that event doesn't exist
+  in WoW 12.0 (Midnight). The bad registration was throwing an Init error
+  on every login: `Frame:RegisterEvent(): Attempt to register unknown event
+  "BOSS_KILL_UNFILTERED"`. Boss-kill capture still works via `BOSS_KILL` and
+  `ENCOUNTER_END` (the active codepaths) — the unfiltered variant was a
+  redundant fallback that never fired anyway.
+
+## [0.1.0] — 2026-05-15
+
+Initial release.
+
+### Features
+- Auto-captures raid lockout data (name, difficulty, leader, roster, boss kills, reset time)
+- Chat scanner auto-detects Battle.net tags (`Name#1234`) shared by raid members
+- Chat scanner auto-detects Discord handles (`discord: name`, `disc: name`, `dc: name`, old-format `name#1234`)
+- Battle.net friend lookup auto-fills btag if the leader is already on your friend list
+- Smart roster tracking: per-player `firstSeen`/`lastSeen` timestamps distinguish current vs dropped raiders
+- Whisper button adapts: uses btag if known, falls back to character whisper
+- Add WoW Friend + Add Bnet helpers
+- Raid-end auto-alert with save-to-disk prompt
+- Save (/reload) button + `/vpt save` slash command for explicit flush
+- Last-saved indicator in panel header (green/gold/red based on age)
+- 24-hour reset reminder on login for unfinished lockouts
+- Standardized minimap button (drag-to-orbit, per-character position)
+- Migration system handles old data with key drift or missing reset timestamps
+- ESC closes panel
+
+### WoW 12.0.5 (Midnight) compatibility
+- Uses `C_DateAndTime.GetSecondsUntilWeeklyReset()` as reset fallback when saved-instance API hasn't populated
+- Respects all public APIs; no combat operations; no taint

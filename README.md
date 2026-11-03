@@ -67,6 +67,7 @@ VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, t
 
 ## Good to Know
 
+- **Settings are per character.** Each character keeps its own VoidPug settings, and a new character starts with the settings of the one you played last, so nothing resets when you update. Right-click the Void hub icon by your minimap and pick **Copy settings from...** to take another character's settings for one Void addon or all of them. Tracked lockouts and players stay shared, and so does how long they're kept.
 - **Why tags are sometimes missing:** WoW only reveals Battle.net tags of people already on your friends list. VoidPug fills them in when someone shares theirs in chat or after you add them — or paste one in with the **Edit** button.
 - Your lockout history is saved account-wide, so every character sees it.
 

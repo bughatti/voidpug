@@ -10,6 +10,10 @@ local function dbg(fmt, ...) if VoidSpy and VoidSpy.Log then VoidSpy:Log("VoidPu
 local ADDON_NAME, VPT = ...
 _G.VoidPug = VPT
 
+-- Settings are per character (CharSettings.lua). How long records are kept
+-- applies to the shared records, so it stays account-wide like them.
+VPT.CharSettings.Register(ADDON_NAME, "VoidPugDB", { "config" }, { "config.retentionDays" })
+
 -- Read from the TOC so it can't drift from the released version.
 VPT.version = (C_AddOns and C_AddOns.GetAddOnMetadata and C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version")) or "?"
 

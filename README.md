@@ -1,5 +1,7 @@
 # VoidPug
 
+**Works on:** WoW Midnight only
+
 **Track pug raid lockouts automatically — never lose contact with a good pug leader.**
 
 VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, the full roster, every boss kill, and when the lockout resets. When the same group re-forms next week, you'll have their contact info ready to whisper or invite.
@@ -75,7 +77,7 @@ VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, t
 
 ## Compatibility
 
-- **WoW 12.1.5** (Midnight Season 2)
+- **WoW Midnight** 12.1.5 (Season 2) only. It tracks Heroic and Mythic raid lockouts, which WoW Forever's raids don't have.
 - Standalone — nothing else to install
 - Combat-safe and taint-free — works alongside any UI addon
 

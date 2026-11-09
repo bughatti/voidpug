@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.12] — 2026-11-09
+
+- **Fixed: box borders missing a side.** Depending on where a window sat on screen, its left, right or bottom line could vanish. Borders are now exactly one screen pixel and can't round away.
+
 ## [0.5.11] — 2026-11-02
 
 ### Changed

@@ -1,4 +1,5 @@
 -- VoidSpy hook: enable with /vspy enable VoidPug  (no-op if VoidSpy missing/disabled)
+local _, ns = ...   -- ns.Move (VoidMove.lua)
 local function dbg(fmt, ...) if VoidSpy and VoidSpy.Log then VoidSpy:Log("VoidPug", fmt, ...) end end
 
 ----------------------------------------------------------------------
@@ -845,6 +846,7 @@ local function CreatePanel()
     f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart", f.StartMoving)
     f:SetScript("OnDragStop", f.StopMovingOrSizing)
+    ns.Move(f, { db = function() return VoidPugDB end, key = "panel" })   -- drag + kept after a restart (VoidMove.lua)
 
     -- Title
     local title = f:CreateFontString(nil, "OVERLAY")

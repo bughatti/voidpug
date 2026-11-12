@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.13] — 2026-11-12
+
+- **The VoidPug window can be dragged and stays where you put it**, even after a restart.
+- **Void hub button:** left-click opens one panel with all your Void addons by name, grouped, each with its own on/off switches (it replaces the ring of icons), with a background slider. The hub's info window now stays where you put it.
+
 ## [0.5.12] — 2026-11-09
 
 - **Fixed: box borders missing a side.** Depending on where a window sat on screen, its left, right or bottom line could vanish. Borders are now exactly one screen pixel and can't round away.

@@ -1,4 +1,4 @@
-# VoidPug
+# VoidPug - PUG Raid Lockout Tracker
 
 **Works on:** WoW Midnight only
 
@@ -83,4 +83,4 @@ VoidPug quietly records every Heroic and Mythic raid pug you join: the leader, t
 
 ---
 
-*Part of the Void addon family by Vede · MIT licensed · [Source & bug reports](https://github.com/bughatti/voidpug) · [All Void addons](https://www.curseforge.com/members/bughatti/projects) · free M+ & raid player lookups at [voidscout.io](https://voidscout.io) · more at [tinkerline.io](https://tinkerline.io) · [Discord](https://discord.gg/7ZHmx7zMDh)*
+*Part of the Void addon family by Vede · MIT licensed · [Source & bug reports](https://github.com/bughatti/voidpug) · [All Void addons](https://www.curseforge.com/members/bughatti/projects) · free M+ & raid player lookups at [voidscout.io](https://voidscout.io) · more at [tinkerline.io](https://tinkerline.io/addons/voidpug/) · [Discord](https://discord.gg/7ZHmx7zMDh)*
